@@ -1,0 +1,8 @@
+---
+- import_tasks: repository.yml
+
+- import_tasks: agent.yml
+  when: sensu_agent
+
+- import_tasks: backend.yml
+  when: sensu_backend

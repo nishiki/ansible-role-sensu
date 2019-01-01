@@ -1,0 +1,52 @@
+---
+- hosts: default
+  connection: local
+  vars:
+    sensu_backend: yes
+    sensu_repository_system: ubuntu
+    sensu_repository_release: xenial
+    sensu_agent_plugins:
+      - name: sensu-plugins-disk-checks
+        version: 3.1.1
+    sensu_agent_labels:
+      test: coucou
+      hello:
+        warning: 30
+        critical: 50
+    sensu_namespaces:
+      - name: supernamespace
+    sensu_users:
+      - name: johndoe
+        password: secret1234
+        groups:
+          - devops
+          - users
+    sensu_assets:
+      - name: superasset
+        url: http://localhost/test.sh
+        sha512: >
+          cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce
+          47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+    sensu_handlers:
+      - name: mail
+        command: echo test | mail -s coucou
+    sensu_filters:
+      - name: state_changed
+        expressions:
+          - event.check.occurrences == 1
+    sensu_checks:
+      - name: ping
+        command: ping -c 1 127.0.0.1
+        subscriptions:
+          - linux
+    sensu_cluster_roles:
+      - name: superview
+        rules:
+          - verbs:
+              - get
+              - list
+            resources:
+              - '*'
+
+  roles:
+    - ansible-role-sensu

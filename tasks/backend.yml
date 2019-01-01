@@ -1,0 +1,140 @@
+---
+- name: install sensu-backend packages
+  apt:
+    name: '{{ packages }}'
+  vars:
+    packages:
+      - sensu-go-backend
+      - sensu-go-cli
+  register: result
+  retries: 3
+  delay: 1
+  until: result is success
+  tags: sensu
+
+- name: copy backend configuration file
+  copy:
+    content: '{{ sensu_backend_full_config|to_nice_yaml }}'
+    dest: /etc/sensu/backend.yml
+    owner: root
+    group: sensu
+    mode: 0640
+  notify: restart sensu-backend
+  tags: sensu
+
+- name: enable and start sensu-backend service
+  systemd:
+    name: sensu-backend
+    state: started
+    enabled: yes
+  tags: sensu
+
+- name: wait sensu backend is started
+  wait_for:
+    port: '{{ sensu_api_url.split(":")[2]|default(80) }}'
+    delay: 5
+  tags: sensu
+
+- name: manage users
+  sensugo_user:
+    name: '{{ item.name }}'
+    groups: '{{ item.groups }}'
+    password: '{{ item.password }}'
+    state: '{{ item.state|default("present") }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_users }}'
+  run_once: true
+  no_log: true
+  tags: sensu
+
+- name: manage cluster roles
+  sensugo_cluster_role:
+    name: '{{ item.name }}'
+    rules: '{{ item.rules }}'
+    state: '{{ item.state|default("present") }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_cluster_roles }}'
+  run_once: true
+  no_log: true
+  tags: sensu
+
+- name: manage namespaces
+  sensugo_namespace:
+    name: '{{ item.name }}'
+    state: '{{ item.state|default("present") }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_namespaces }}'
+  run_once: true
+  no_log: true
+  tags: sensu
+
+- name: manage assets
+  sensugo_asset:
+    name: '{{ item.name }}'
+    namespace: '{{ item.namespace|default("default") }}'
+    url: '{{ item.url }}'
+    sha512: '{{ item.sha512 }}'
+    filters: '{{ item.filters|default([]) }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_assets }}'
+  run_once: true
+  no_log: true
+  tags: sensu
+
+- name: manage filters
+  sensugo_filter:
+    name: '{{ item.name }}'
+    namespace: '{{ item.namespace|default("default") }}'
+    action: '{{ item.action|default("allow") }}'
+    expressions: '{{ item.expressions }}'
+    runtime_assets: '{{ item.runtime_assets|default([]) }}'
+    state: '{{ item.state|default("present") }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_filters }}'
+  run_once: true
+  no_log: true
+  tags: sensu
+
+- name: manage handlers
+  sensugo_handler:
+    name: '{{ item.name }}'
+    namespace: '{{ item.namespace|default("default") }}'
+    type: '{{ item.type|default("pipe") }}'
+    command: '{{ item.command }}'
+    filters: '{{ item.filters|default([]) }}'
+    options: '{{ item.options|default({}) }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_handlers }}'
+  run_once: true
+  no_log: true
+  tags: sensu
+
+- name: manage checks
+  sensugo_check:
+    name: '{{ item.name }}'
+    namespace: '{{ item.namespace|default("default") }}'
+    command: '{{ item.command }}'
+    handlers: '{{ item.handlers|default([]) }}'
+    subscriptions: '{{ item.subscriptions }}'
+    interval: '{{ item.interval|default(60) }}'
+    options: '{{ item.options|default({}) }}'
+    state: '{{ item.state|default("present") }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_checks }}'
+  run_once: true
+  no_log: true
+  tags: sensu

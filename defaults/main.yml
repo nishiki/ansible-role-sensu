@@ -1,0 +1,43 @@
+---
+sensu_agent: yes
+sensu_backend: no
+
+sensu_repository_system: '{{ ansible_distribution|lower }}'
+sensu_repository_release: '{{ ansible_distribution_release }}'
+
+sensu_api_url: http://127.0.0.1:8080
+sensu_api_user: admin
+sensu_api_password: 'P@ssw0rd!'
+
+sensu_agent_user: agent
+sensu_agent_password: 'P@ssw0rd!'
+
+sensu_agent_plugins: []
+sensu_agent_subscriptions: []
+sensu_agent_labels: {}
+sensu_agent_backends:
+  - 'ws://localhost:8081'
+sensu_agent_namespace: default
+sensu_agent_default_config:
+  name: '{{ inventory_hostname }}'
+  namespace: '{{ sensu_agent_namespace }}'
+  backend-url: '{{ sensu_agent_backends }}'
+  user: '{{ sensu_agent_user }}'
+  password: '{{ sensu_agent_password }}'
+  subscriptions: '{{ sensu_agent_subscriptions }}'
+  labels: '{{ sensu_agent_labels }}'
+sensu_agent_config: {}
+sensu_agent_full_config: '{{ sensu_agent_default_config|combine(sensu_agent_config) }}'
+
+sensu_backend_default_config:
+  state-dir: /var/lib/sensu/sensu-backend
+sensu_backend_config: {}
+sensu_backend_full_config: '{{ sensu_backend_default_config|combine(sensu_backend_config) }}'
+
+sensu_assets: []
+sensu_namespaces: []
+sensu_checks: []
+sensu_handlers: []
+sensu_filters: []
+sensu_users: []
+sensu_cluster_roles: []

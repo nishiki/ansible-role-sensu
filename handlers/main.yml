@@ -1,0 +1,10 @@
+---
+- name: restart sensu-agent
+  systemd:
+    name: sensu-agent
+    state: restarted
+
+- name: restart sensu-backend
+  systemd:
+    name: sensu-backend
+    state: restarted

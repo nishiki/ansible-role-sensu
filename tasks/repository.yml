@@ -1,0 +1,37 @@
+---
+- name: install dependencies packages
+  apt:
+    name: '{{ packages }}'
+  vars:
+    packages:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg2
+      - software-properties-common
+  register: result
+  retries: 3
+  delay: 1
+  until: result is success
+  tags: sensu
+
+- name: add gpg key for sensu repository
+  apt_key:
+    url: 'https://packagecloud.io/sensu/{{ item }}/gpgkey'
+  loop:
+    - stable
+    - community
+  register: result
+  retries: 3
+  delay: 1
+  until: result is success
+  tags: sensu
+
+- name: add sensu repository
+  apt_repository:
+    repo: >
+      deb https://packagecloud.io/sensu/{{ item }}/{{ sensu_repository_system }}/
+      {{ sensu_repository_release }} main
+  loop:
+    - stable
+    - community
+  tags: sensu

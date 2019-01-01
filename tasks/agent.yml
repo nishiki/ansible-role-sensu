@@ -1,0 +1,44 @@
+---
+- name: install sensu-agent packages
+  apt:
+    name: '{{ packages }}'
+  vars:
+    packages:
+      - sensu-go-agent
+      - sensu-plugins-ruby
+      - monitoring-plugins-basic
+  register: result
+  retries: 3
+  delay: 1
+  until: result is success
+  tags: sensu
+
+- name: copy agent configuration file
+  copy:
+    content: '{{ sensu_agent_full_config|to_nice_yaml }}'
+    dest: /etc/sensu/agent.yml
+    owner: root
+    group: sensu
+    mode: 0640
+  notify: restart sensu-agent
+  tags: sensu
+
+- name: enable and start sensu-agent service
+  systemd:
+    name: sensu-agent
+    state: started
+    enabled: yes
+  tags: sensu
+
+- name: install sensu plugins
+  gem:
+    name: '{{ item.name }}'
+    version: '{{ item.version }}'
+    executable: /opt/sensu-plugins-ruby/embedded/bin/gem
+    user_install: no
+  loop: '{{ sensu_agent_plugins }}'
+  register: result
+  retries: 3
+  delay: 1
+  until: result is success
+  tags: sensu

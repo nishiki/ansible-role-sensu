@@ -1,5 +1,5 @@
 # Ansible role: Sensu
-[![Version](https://img.shields.io/badge/latest_version-1.0.0_dev-green.svg)](https://git.yaegashi.fr/nishiki/ansible-role-sensu/releases)
+[![Version](https://img.shields.io/badge/latest_version-1.0.0-green.svg)](https://git.yaegashi.fr/nishiki/ansible-role-sensu/releases)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://git.yaegashi.fr/nishiki/ansible-role-sensu/src/branch/master/LICENSE)
 
 Install and configure sensu-go backend and agent

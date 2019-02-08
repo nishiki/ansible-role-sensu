@@ -6,6 +6,7 @@
     packages:
       - sensu-go-agent
       - sensu-plugins-ruby
+      - build-essential
       - monitoring-plugins-basic
   register: result
   retries: 3

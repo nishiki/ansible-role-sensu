@@ -11,6 +11,7 @@ puts '================================'
   sensu-go-agent
   sensu-go-cli
   sensu-go-backend
+  build-essential
   monitoring-plugins-basic
   python-requests
 ].each do |package|

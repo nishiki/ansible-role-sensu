@@ -12,6 +12,7 @@ puts '================================'
   sensu-go-cli
   sensu-go-backend
   monitoring-plugins-basic
+  python-requests
 ].each do |package|
   describe package(package) do
     it { should be_installed }

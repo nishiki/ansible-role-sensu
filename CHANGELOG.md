@@ -6,6 +6,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 ## [Unreleased]
 - fix: install python-requests for backend
 - fix: install build-essential for agent
+- test: add travis ci
 
 ## [1.0.0] - 2019-02-06
 - first version

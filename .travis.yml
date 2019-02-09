@@ -1,0 +1,28 @@
+---
+sudo: required
+language: ruby
+
+env:
+  - ANSIBLE_VERSION=2.5
+  - ANSIBLE_VERSION=2.6
+  - ANSIBLE_VERSION=2.7
+
+services:
+  - docker
+
+before_install:
+  - bundle install
+  - sudo pip install --upgrade pip
+  - sudo pip install yamllint
+  - sudo pip install ansible-lint
+  - git clone https://github.com/ansible/galaxy-lint-rules.git
+
+script:
+  - kitchen conv default-debian-9
+  - kitchen conv default-debian-9 | grep changed=0
+  - kitchen verify default-debian-9
+  - ansible-lint -r galaxy-lint-rules/rules .
+  - yamllint .
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

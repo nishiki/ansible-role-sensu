@@ -1,12 +1,13 @@
 # Ansible role: Sensu
 [![Version](https://img.shields.io/badge/latest_version-1.0.0-green.svg)](https://git.yaegashi.fr/nishiki/ansible-role-sensu/releases)
+[![Build Status](https://travis-ci.org/nishiki/ansible-role-sensu.svg?branch=master)](https://travis-ci.org/nishiki/ansible-role-sensu)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://git.yaegashi.fr/nishiki/ansible-role-sensu/src/branch/master/LICENSE)
 
 Install and configure sensu-go backend and agent
 
 ## Requirements
 
-* Ansible >= 2.7
+* Ansible >= 2.5
 * Debian Stretch
 
 ## Role variables

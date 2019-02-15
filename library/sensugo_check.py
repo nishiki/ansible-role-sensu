@@ -49,7 +49,7 @@ class SensuCheck:
 def main():
   fields = {
     'name':          { 'type': 'str',  'required': True },
-    'namespace':     { 'type': 'str',  'default': 'default' },
+    'namespaces':    { 'type': 'list', 'default': ['default'] },
     'command':       { 'type': 'str',  'required': True },
     'handlers':      { 'type': 'list', 'default': [] },
     'subscriptions': { 'type': 'list', 'required': True },
@@ -81,20 +81,21 @@ def main():
   )
   api.auth()
 
-  check = SensuCheck(
-    api,
-    module.params['name'],
-    module.params['namespace']
-  )
-  check.get_data()
+  for namespace in module.params['namespaces']:
+    check = SensuCheck(
+      api,
+      module.params['name'],
+      namespace
+    )
+    check.get_data()
 
-  if module.params['state'] == 'present':
-    if not check.exist or check.has_changed(options):
-      check.create(options)
-      changed = True
-  elif check.exist:
-      check.delete()
-      changed = True
+    if module.params['state'] == 'present':
+      if not check.exist or check.has_changed(options):
+        check.create(options)
+        changed = True
+    elif check.exist:
+        check.delete()
+        changed = True
 
   module.exit_json(changed=changed)
 

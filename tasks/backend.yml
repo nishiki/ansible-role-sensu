@@ -78,7 +78,7 @@
 - name: manage assets
   sensugo_asset:
     name: '{{ item.name }}'
-    namespace: '{{ item.namespace|default("default") }}'
+    namespaces: '{{ item.namespaces|default(["default"]) }}'
     url: '{{ item.url }}'
     sha512: '{{ item.sha512 }}'
     filters: '{{ item.filters|default([]) }}'
@@ -93,7 +93,7 @@
 - name: manage filters
   sensugo_filter:
     name: '{{ item.name }}'
-    namespace: '{{ item.namespace|default("default") }}'
+    namespaces: '{{ item.namespaces|default(["default"]) }}'
     action: '{{ item.action|default("allow") }}'
     expressions: '{{ item.expressions }}'
     runtime_assets: '{{ item.runtime_assets|default([]) }}'
@@ -109,7 +109,7 @@
 - name: manage handlers
   sensugo_handler:
     name: '{{ item.name }}'
-    namespace: '{{ item.namespace|default("default") }}'
+    namespaces: '{{ item.namespaces|default(["default"]) }}'
     type: '{{ item.type|default("pipe") }}'
     command: '{{ item.command }}'
     filters: '{{ item.filters|default([]) }}'
@@ -125,7 +125,7 @@
 - name: manage checks
   sensugo_check:
     name: '{{ item.name }}'
-    namespace: '{{ item.namespace|default("default") }}'
+    namespaces: '{{ item.namespaces|default(["default"]) }}'
     command: '{{ item.command }}'
     handlers: '{{ item.handlers|default([]) }}'
     subscriptions: '{{ item.subscriptions }}'

@@ -43,7 +43,7 @@ class SensuAsset:
 def main():
   fields = {
     'name':         { 'type': 'str',  'required': True },
-    'namespace':    { 'type': 'str',  'default': 'default' },
+    'namespaces':   { 'type': 'list', 'default': ['default'] },
     'url':          { 'type': 'str',  'required': True },
     'sha512':       { 'type': 'str',  'required': True },
     'filters':      { 'type': 'list', 'default': [] },
@@ -67,17 +67,18 @@ def main():
   )
   api.auth()
 
-  asset = SensuAsset(
-    api,
-    module.params['name'],
-    module.params['namespace']
-  )
-  asset.get_data()
+  for namespace in module.params['namespaces']:
+    asset = SensuAsset(
+      api,
+      module.params['name'],
+      namespace
+    )
+    asset.get_data()
 
-  if not asset.exist or asset.has_changed(options):
-    asset.create(options)
-  else:
-    changed = False
+    if not asset.exist or asset.has_changed(options):
+      asset.create(options)
+    else:
+      changed = False
 
   module.exit_json(changed=changed)
 

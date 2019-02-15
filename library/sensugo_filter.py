@@ -49,7 +49,7 @@ class SensuFilter:
 def main():
   fields = {
     'name':           { 'type': 'str',  'required': True },
-    'namespace':      { 'type': 'str',  'default': 'default' },
+    'namespaces':     { 'type': 'list', 'default': ['default'] },
     'action':         { 'type': 'str',  'default': 'allow', 'choices': ['allow', 'deny'] },
     'expressions':    { 'type': 'list', 'required': True },
     'runtime_assets': { 'type': 'list', 'default': [] },
@@ -74,20 +74,21 @@ def main():
   )
   api.auth()
 
-  filter = SensuFilter(
-    api,
-    module.params['name'],
-    module.params['namespace']
-  )
-  filter.get_data()
+  for namespace in module.params['namespaces']:
+    filter = SensuFilter(
+      api,
+      module.params['name'],
+      namespace
+    )
+    filter.get_data()
 
-  if module.params['state'] == 'present':
-    if not filter.exist or filter.has_changed(options):
-      filter.create(options)
-      changed = True
-  elif filter.exist:
-      filter.delete()
-      changed = True
+    if module.params['state'] == 'present':
+      if not filter.exist or filter.has_changed(options):
+        filter.create(options)
+        changed = True
+    elif filter.exist:
+        filter.delete()
+        changed = True
 
   module.exit_json(changed=changed)
 

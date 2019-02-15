@@ -49,7 +49,7 @@ class SensuHandler:
 def main():
   fields = {
     'name':         { 'type': 'str',  'required': True },
-    'namespace':    { 'type': 'str',  'default': 'default' },
+    'namespaces':   { 'type': 'list', 'default': ['default'] },
     'type':         { 'type': 'str',  'default': 'pipe', 'choices': ['pipe', 'tcp', 'udp', 'set'] },
     'command':      { 'type': 'str',  'required': True },
     'filters':      { 'type': 'list', 'default': [] },
@@ -76,20 +76,21 @@ def main():
   )
   api.auth()
 
-  handler = SensuHandler(
-    api,
-    module.params['name'],
-    module.params['namespace']
-  )
-  handler.get_data()
+  for namespace in module.params['namespaces']:
+    handler = SensuHandler(
+      api,
+      module.params['name'],
+      namespace
+    )
+    handler.get_data()
 
-  if module.params['state'] == 'present':
-    if not handler.exist or handler.has_changed(options):
-      handler.create(options)
-      changed = True
-  elif handler.exist:
-      handler.delete()
-      changed = True
+    if module.params['state'] == 'present':
+      if not handler.exist or handler.has_changed(options):
+        handler.create(options)
+        changed = True
+    elif handler.exist:
+        handler.delete()
+        changed = True
 
   module.exit_json(changed=changed)
 

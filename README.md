@@ -61,7 +61,8 @@ Install and configure sensu-go backend and agent
 
 ```
   - name: http-binary
-    namespace: default
+    namespace:
+      - default
     url: http://host.local
     sha512: XXXX
     filters: []
@@ -78,7 +79,8 @@ Install and configure sensu-go backend and agent
 
 ```
   - name: load
-    namespace: default
+    namespace:
+      - default
     command: /usr/bin/load -w 2 -c 5
     handlers:
       - mailer
@@ -93,7 +95,8 @@ Install and configure sensu-go backend and agent
 
 ```
   - name: mailer
-    namespace: default
+    namespace:
+      - default
     type: pipe
     command: /usr/local/bin/sensu-email-handler -t sensu@host.local
     filters:
@@ -106,7 +109,8 @@ Install and configure sensu-go backend and agent
 
 ```
   - name: max_occurences
-    namespace: default
+    namespace:
+      - default
     action: allow
     expressions:
     runtime_assets: []

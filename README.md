@@ -43,9 +43,8 @@ Install and configure sensu-go backend and agent
 
 ```
   region: Europe
-  disk:
-    critical: 90
-    warning: 75
+  disk_critical: 90
+  disk_warning: 75
 ```
 
 * `sensu_agent_backends` - array with the backends url

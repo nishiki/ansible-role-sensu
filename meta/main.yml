@@ -13,6 +13,7 @@ galaxy_info:
         - stretch
     - name: Ubuntu
       versions:
+        - 16.04
         - 18.04
 
   galaxy_tags:

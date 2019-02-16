@@ -33,6 +33,13 @@ platforms:
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       security_opt: seccomp=unconfined
+  - name: ubuntu16.04
+    driver_config:
+      image: "nishiki/ubuntu16.04:ansible-<%= ENV['ANSIBLE_VERSION'] ? ENV['ANSIBLE_VERSION'] : '2.7' %>"
+      command: /bin/systemd
+      volume:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      security_opt: seccomp=unconfined
 
 suites:
   - name: default

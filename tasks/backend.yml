@@ -1,12 +1,13 @@
 ---
+- include_tasks: 'backend-dependencies-{{ ansible_os_family|lower }}.yml'
+
 - name: install sensu-backend packages
-  apt:
+  package:
     name: '{{ packages }}'
   vars:
     packages:
       - sensu-go-backend
       - sensu-go-cli
-      - python-requests
   register: result
   retries: 3
   delay: 1

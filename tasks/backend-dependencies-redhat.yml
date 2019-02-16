@@ -1,0 +1,19 @@
+---
+- name: uninstall bad dependencies
+  yum:
+    name: '{{ packages }}'
+    state: absent
+  vars:
+    packages:
+      - python-urllib3
+      - python-requests
+  tags: sensu
+
+- name: install backend dependencies
+  pip:
+    name: '{{ packages }}'
+  vars:
+    packages:
+      - urllib3
+      - requests
+  tags: sensu

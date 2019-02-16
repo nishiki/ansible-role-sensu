@@ -12,6 +12,7 @@ Install and configure sensu-go backend and agent
   * Debian Stretch
   * Ubuntu 18.04
   * Ubuntu 16.04
+  * Centos 7
 
 ## Role variables
 ### General

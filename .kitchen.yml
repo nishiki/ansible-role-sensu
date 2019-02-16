@@ -40,6 +40,13 @@ platforms:
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       security_opt: seccomp=unconfined
+  - name: centos7
+    driver_config:
+      image: "nishiki/centos7:ansible-<%= ENV['ANSIBLE_VERSION'] ? ENV['ANSIBLE_VERSION'] : '2.7' %>"
+      command: /usr/sbin/init
+      volume:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      security_opt: seccomp=unconfined
 
 suites:
   - name: default

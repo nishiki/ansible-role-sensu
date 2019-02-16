@@ -1,5 +1,5 @@
 ---
-- import_tasks: repository.yml
+- include_tasks: 'repository-{{ ansible_os_family|lower }}.yml'
 
 - import_tasks: agent.yml
   when: sensu_agent

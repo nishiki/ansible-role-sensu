@@ -1,0 +1,5 @@
+---
+- name: install backend dependencies
+  apt:
+    name: python-requests
+  tags: sensu

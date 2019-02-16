@@ -1,0 +1,13 @@
+---
+- name: add sensu repository
+  yum_repository:
+    name: sensu-{{ item }}
+    description: Sensu {{ item }} repository
+    gpgkey: 'https://packagecloud.io/sensu/{{ item }}/gpgkey'
+    gpgcheck: false
+    repo_gpgcheck: true
+    baseurl: 'https://packagecloud.io/sensu/{{ item }}/el/$releasever/$basearch'
+  loop:
+    - stable
+    - community
+  tags: sensu

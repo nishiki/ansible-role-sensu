@@ -1,13 +1,11 @@
 ---
 - name: install sensu-agent packages
-  apt:
+  package:
     name: '{{ packages }}'
   vars:
     packages:
       - sensu-go-agent
       - sensu-plugins-ruby
-      - build-essential
-      - monitoring-plugins-basic
   register: result
   retries: 3
   delay: 1

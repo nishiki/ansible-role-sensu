@@ -11,6 +11,9 @@ galaxy_info:
     - name: Debian
       versions:
         - stretch
+    - name: Ubuntu
+      versions:
+        - 18.04
 
   galaxy_tags:
     - sensu

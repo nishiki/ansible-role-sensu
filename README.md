@@ -8,7 +8,9 @@ Install and configure sensu-go backend and agent
 ## Requirements
 
 * Ansible >= 2.5
-* Debian Stretch
+* OS
+  * Debian Stretch
+  * Ubuntu 18.04
 
 ## Role variables
 ### General

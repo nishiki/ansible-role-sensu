@@ -3,8 +3,6 @@
   connection: local
   vars:
     sensu_backend: yes
-    sensu_repository_system: ubuntu
-    sensu_repository_release: xenial
     sensu_agent_plugins:
       - name: sensu-plugins-disk-checks
         version: 3.1.1

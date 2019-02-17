@@ -7,6 +7,10 @@
     packages:
       - python-urllib3
       - python-requests
+  register: result
+  retries: 1
+  delay: 1
+  until: result is success
   tags: sensu
 
 - name: install backend dependencies
@@ -16,4 +20,8 @@
     packages:
       - urllib3
       - requests
+  register: result
+  retries: 3
+  delay: 1
+  until: result is success
   tags: sensu

@@ -2,4 +2,8 @@
 - name: install backend dependencies
   apt:
     name: python-requests
+  register: result
+  retries: 3
+  delay: 1
+  until: result is success
   tags: sensu

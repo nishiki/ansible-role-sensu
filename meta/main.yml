@@ -15,7 +15,7 @@ galaxy_info:
       versions:
         - xenial
         - cosmic
-    - name: centos
+    - name: el
       versions:
         - 7
 

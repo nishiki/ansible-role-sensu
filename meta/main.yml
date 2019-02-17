@@ -21,6 +21,10 @@ galaxy_info:
 
   galaxy_tags:
     - sensu
+    - sensugo
+    - dashboard
+    - agent
+    - backend
     - monitoring
     - alerting
 

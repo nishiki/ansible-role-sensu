@@ -1,4 +1,8 @@
 ---
+# <% os =  ENV['OS'] || 'debian9' %>
+# <% ansible = ENV['ANSIBLE_VERSION'] || '2.7' %>
+# <% command = os == 'centos7' ? '/usr/sbin/init' : '/bin/systemd' %>
+
 driver:
   name: docker_cli
 
@@ -15,38 +19,19 @@ provisioner:
   ansible_inventory: ./test/integration/inventory
 
 platforms:
-  - name: debian9
+  - name: <%= os %>
     driver_config:
-      image: "nishiki/debian9:ansible-<%= ENV['ANSIBLE_VERSION'] ? ENV['ANSIBLE_VERSION'] : '2.7' %>"
-      command: /bin/systemd
+      image: "nishiki/<%= os %>:ansible-<%= ansible %>"
+      command: <%= command %>
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       security_opt: seccomp=unconfined
+# <% if os == 'debian9' %>
     provisioner:
       extra_vars:
         sensu_repository_system: ubuntu
         sensu_repository_release: xenial
-  - name: ubuntu18.04
-    driver_config:
-      image: "nishiki/ubuntu18.04:ansible-<%= ENV['ANSIBLE_VERSION'] ? ENV['ANSIBLE_VERSION'] : '2.7' %>"
-      command: /bin/systemd
-      volume:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      security_opt: seccomp=unconfined
-  - name: ubuntu16.04
-    driver_config:
-      image: "nishiki/ubuntu16.04:ansible-<%= ENV['ANSIBLE_VERSION'] ? ENV['ANSIBLE_VERSION'] : '2.7' %>"
-      command: /bin/systemd
-      volume:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      security_opt: seccomp=unconfined
-  - name: centos7
-    driver_config:
-      image: "nishiki/centos7:ansible-<%= ENV['ANSIBLE_VERSION'] ? ENV['ANSIBLE_VERSION'] : '2.7' %>"
-      command: /usr/sbin/init
-      volume:
-        - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      security_opt: seccomp=unconfined
+# <% end %>
 
 suites:
   - name: default

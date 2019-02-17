@@ -20,6 +20,8 @@ Install and configure sensu-go backend and agent
 * `sensu_repository_system` - system for package repository (default: `ansible_distribution`)
 * `sensu_repository_release` - system release for package repository (default: `ansible_distribution_release`)
 
+Notice: for debian9 set `sensu_repository_system` to `ubuntu` and `sensu_repository_release` to `xenial`
+
 ### Agent
 
 * `sensu_agent` - enable sensu agent installation (default: `yes`)

@@ -1,6 +1,6 @@
 ---
 - name: install dependencies packages
-  apt:
+  package:
     name: '{{ packages }}'
   vars:
     packages:

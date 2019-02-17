@@ -1,6 +1,6 @@
 ---
 - name: uninstall bad dependencies
-  yum:
+  package:
     name: '{{ packages }}'
     state: absent
   vars:

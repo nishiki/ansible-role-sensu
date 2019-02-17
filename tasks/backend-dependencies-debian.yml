@@ -1,6 +1,6 @@
 ---
 - name: install backend dependencies
-  apt:
+  package:
     name: python-requests
   register: result
   retries: 3

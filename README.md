@@ -150,11 +150,65 @@ Notice: for debian9 set `sensu_repository_system` to `ubuntu` and `sensu_reposit
 * `sensu_api_password` - password for sensu api (default: `P@ssw0rd!`)
 
 ## How to use
+### Agent
+
+```
+- hosts: webserver
+  roles:
+    - sensu
+  vars:
+    sensu_agent_subscriptions:
+      - debian
+      - webserver
+    sensu_agent_labels:
+      datacenter: paris
+      disk_warning: 30
+      disk_critical: 50
+    sensu_agent_plugins:
+      - name: sensu-plugins-disk-checks
+        version: 3.1.1
+```
+
+### Backend
 
 ```
 - hosts: monitoring
   roles:
     - sensu
+  vars:
+    sensu_backend: yes
+    sensu_namespaces:
+      - name: production
+      - name: dev
+    sensu_users:
+      - name: johndoe
+        password: secret1234
+        groups:
+          - devops
+          - users
+    sensu_handlers:
+      - name: mail
+        command: /usr/local/bin/handler-mailer
+        namespaces:
+          - production
+          - dev
+    sensu_filters:
+      - name: state_changed
+        expressions:
+          - event.check.occurrences == 1
+        namespaces:
+          - production
+          - dev
+    sensu_checks:
+      - name: ping
+        command: ping -c 1 127.0.0.1
+        subscriptions:
+          - linux
+        namespaces:
+          - production
+          - dev
+    sensu_cluster_roles:
+      - name: superview
 ```
 
 ## Development

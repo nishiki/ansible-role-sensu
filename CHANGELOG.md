@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+- doc: add example in readme
 
 ## [1.1.0] - 2019-02-17
 - feat: add support of centos 7

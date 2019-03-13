@@ -107,6 +107,20 @@
   no_log: true
   tags: sensu
 
+- name: manage mutators
+  sensugo_mutator:
+    name: '{{ item.name }}'
+    namespaces: '{{ item.namespaces|default(["default"]) }}'
+    command: '{{ item.command }}'
+    options: '{{ item.options|default({}) }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_mutators }}'
+  run_once: true
+  no_log: true
+  tags: sensu
+
 - name: manage handlers
   sensugo_handler:
     name: '{{ item.name }}'

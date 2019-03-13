@@ -103,6 +103,17 @@ Notice: for debian9 set `sensu_repository_system` to `ubuntu` and `sensu_reposit
       ttl: 300
 ```
 
+* `sensu_mutators` - array with the mutator definitions
+
+```
+  - name: convert2csv
+    namespace:
+      - default
+    command: /usr/local/bin/convert_to_csv
+    options:
+      timeout: 10
+```
+
 * `sensu_handlers` - array with the handler definitions
 
 ```

@@ -29,6 +29,12 @@
         namespaces:
           - production
           - dev
+    sensu_mutators:
+      - name: transform
+        command: /path/value_to_csv
+        namespaces:
+          - production
+          - dev
     sensu_handlers:
       - name: mail
         command: echo test | mail -s coucou

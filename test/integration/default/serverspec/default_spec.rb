@@ -63,6 +63,11 @@ end
     its(:stdout) { should match(/superasset.*\s+.*test.sh\s+cf83e13/) }
   end
 
+  describe command("sensuctl mutator list --namespace #{namespace}") do
+    its(:exit_status) { should eq 0 }
+    its(:stdout) { should match(%r{transform.*\s+.*/path/value_to_csv}) }
+  end
+
   describe command("sensuctl handler list --namespace #{namespace}") do
     its(:exit_status) { should eq 0 }
     its(:stdout) { should match(/mail.*\s+pipe\s+.*echo test \| mail -s coucou\s+/) }

@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+- feat: add sensu_agent_redact variable to add new redact keywords
 - doc: add example in readme
 
 ## [1.1.0] - 2019-02-17

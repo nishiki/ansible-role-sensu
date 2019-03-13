@@ -49,6 +49,13 @@ Notice: for debian9 set `sensu_repository_system` to `ubuntu` and `sensu_reposit
   disk_warning: 75
 ```
 
+* `sensu_agent_redact` - array with the redact keywords
+
+```
+  - supersecret
+  - apikey
+```
+
 * `sensu_agent_backends` - array with the backends url
 
 ```

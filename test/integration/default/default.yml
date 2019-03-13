@@ -3,14 +3,14 @@
   connection: local
   vars:
     sensu_backend: yes
+    sensu_agent_redact:
+      - supersecret
     sensu_agent_plugins:
       - name: sensu-plugins-disk-checks
         version: 3.1.1
     sensu_agent_labels:
       test: coucou
-      hello:
-        warning: 30
-        critical: 50
+      supersecret: password
     sensu_namespaces:
       - name: production
       - name: dev

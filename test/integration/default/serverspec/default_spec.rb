@@ -52,6 +52,11 @@ describe command('sensuctl user list') do
   its(:stdout) { should match(/johndoe.*\s+devops,users\s+.*true/) }
 end
 
+describe command('sensuctl entity info localhost --format json') do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should match(/"supersecret": "REDACTED"/) }
+end
+
 %w[production dev].each do |namespace|
   describe command("sensuctl asset list --namespace  #{namespace}") do
     its(:exit_status) { should eq 0 }

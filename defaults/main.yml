@@ -15,6 +15,17 @@ sensu_agent_password: 'P@ssw0rd!'
 sensu_agent_plugins: []
 sensu_agent_subscriptions: []
 sensu_agent_labels: {}
+sensu_agent_default_redact:
+  - password
+  - passwd
+  - pass
+  - secret
+  - api_key
+  - api_token
+  - access_key
+  - secret_key
+  - private_key
+sensu_agent_redact: []
 sensu_agent_backends:
   - 'ws://localhost:8081'
 sensu_agent_namespace: default
@@ -26,6 +37,7 @@ sensu_agent_default_config:
   password: '{{ sensu_agent_password }}'
   subscriptions: '{{ sensu_agent_subscriptions }}'
   labels: '{{ sensu_agent_labels }}'
+  redact: '{{ sensu_agent_default_redact + sensu_agent_redact }}'
 sensu_agent_config: {}
 sensu_agent_full_config: '{{ sensu_agent_default_config|combine(sensu_agent_config) }}'
 

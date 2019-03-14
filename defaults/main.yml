@@ -2,6 +2,8 @@
 sensu_agent: yes
 sensu_backend: no
 
+sensu_no_log: true
+
 sensu_repository_system: '{{ ansible_distribution|lower }}'
 sensu_repository_release: '{{ ansible_distribution_release }}'
 

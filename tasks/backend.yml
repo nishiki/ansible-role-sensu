@@ -48,7 +48,7 @@
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_users }}'
   run_once: true
-  no_log: true
+  no_log: '{{ sensu_no_log }}'
   tags: sensu
 
 - name: manage cluster roles
@@ -61,7 +61,7 @@
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_cluster_roles }}'
   run_once: true
-  no_log: true
+  no_log: '{{ sensu_no_log }}'
   tags: sensu
 
 - name: manage namespaces
@@ -73,7 +73,7 @@
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_namespaces }}'
   run_once: true
-  no_log: true
+  no_log: '{{ sensu_no_log }}'
   tags: sensu
 
 - name: manage assets
@@ -88,7 +88,7 @@
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_assets }}'
   run_once: true
-  no_log: true
+  no_log: '{{ sensu_no_log }}'
   tags: sensu
 
 - name: manage filters
@@ -104,7 +104,7 @@
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_filters }}'
   run_once: true
-  no_log: true
+  no_log: '{{ sensu_no_log }}'
   tags: sensu
 
 - name: manage mutators
@@ -118,7 +118,7 @@
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_mutators }}'
   run_once: true
-  no_log: true
+  no_log: '{{ sensu_no_log }}'
   tags: sensu
 
 - name: manage handlers
@@ -134,7 +134,7 @@
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_handlers }}'
   run_once: true
-  no_log: true
+  no_log: '{{ sensu_no_log }}'
   tags: sensu
 
 - name: manage checks
@@ -152,5 +152,5 @@
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_checks }}'
   run_once: true
-  no_log: true
+  no_log: '{{ sensu_no_log }}'
   tags: sensu

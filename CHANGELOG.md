@@ -4,12 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+- fix: create roles before users
 - feat: add a debug mode with sensu_no_log variable
 - feat: add mutators
 - feat: add sensu_agent_redact variable to add new redact keywords
 - doc: add example in readme
 
 ## [1.1.0] - 2019-02-17
+
 - feat: add support of centos 7
 - feat: add support of ubuntu 16.04
 - feat: add support of ubuntu 18.04
@@ -18,4 +21,5 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 - test: add travis ci
 
 ## [1.0.0] - 2019-02-06
+
 - first version

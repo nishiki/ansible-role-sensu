@@ -37,6 +37,19 @@
     delay: 5
   tags: sensu
 
+- name: manage cluster roles
+  sensugo_cluster_role:
+    name: '{{ item.name }}'
+    rules: '{{ item.rules }}'
+    state: '{{ item.state|default("present") }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_cluster_roles }}'
+  run_once: true
+  no_log: '{{ sensu_no_log }}'
+  tags: sensu
+
 - name: manage users
   sensugo_user:
     name: '{{ item.name }}'
@@ -47,19 +60,6 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_users }}'
-  run_once: true
-  no_log: '{{ sensu_no_log }}'
-  tags: sensu
-
-- name: manage cluster roles
-  sensugo_cluster_role:
-    name: '{{ item.name }}'
-    rules: '{{ item.rules }}'
-    state: '{{ item.state|default("present") }}'
-    api_url: '{{ sensu_api_url }}'
-    api_user: '{{ sensu_api_user }}'
-    api_password: '{{ sensu_api_password }}'
-  loop: '{{ sensu_cluster_roles }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu

@@ -5,6 +5,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+- feat: add labels in checks
 - fix: create roles before users
 - feat: add a debug mode with sensu_no_log variable
 - feat: add mutators

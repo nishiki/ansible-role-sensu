@@ -4,21 +4,37 @@ from ansible.module_utils.basic import *
 from ansible.module_utils.sensu_api import *
 
 class SensuCheck:
-  def __init__(self, api, name, namespace):
+  def __init__(self, api, name, namespace, labels):
     self.api       = api
     self.name      = name
     self.namespace = namespace
+    self.labels    = labels
     self.exist     = False
 
   def get_data(self):
     status_code, data = self.api.get('namespaces/{}/checks/{}'.format(self.namespace, self.name))
     if status_code == 200:
       self.exist   = True
-      self.options = data
-      self.options.pop('metadata')
-    
+      return data
+
+    return {}
+
+  def labels_has_changed(self, new_labels, old_labels):
+    if old_labels is None or len(new_labels) != len(old_labels):
+      return True
+
+    for old_label, old_value in old_labels.iteritems():
+      if old_label in new_labels and new_labels[old_label] != old_value:
+        continue
+      return True
+
+    return False
+
   def has_changed(self, options):
-    for option, value in self.options.iteritems():
+    data = self.get_data()
+    if self.labels_has_changed(self.labels, data['metadata'].get('labels')):
+      return True
+    for option, value in data:
       if not option in options:
         if value:
           return True
@@ -31,7 +47,8 @@ class SensuCheck:
     options.update({
       'metadata': {
         'name': self.name,
-        'namespace': self.namespace
+        'namespace': self.namespace,
+        'labels': self.labels
       }
     })
 
@@ -50,6 +67,7 @@ def main():
   fields = {
     'name':          { 'type': 'str',  'required': True },
     'namespaces':    { 'type': 'list', 'default': ['default'] },
+    'labels':        { 'type': 'dict', 'default': {} },
     'command':       { 'type': 'str',  'required': True },
     'handlers':      { 'type': 'list', 'default': [] },
     'subscriptions': { 'type': 'list', 'required': True },
@@ -85,7 +103,8 @@ def main():
     check = SensuCheck(
       api,
       module.params['name'],
-      namespace
+      namespace,
+      module.params['labels']
     )
     check.get_data()
 

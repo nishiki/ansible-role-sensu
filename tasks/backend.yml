@@ -141,6 +141,7 @@
   sensugo_check:
     name: '{{ item.name }}'
     namespaces: '{{ item.namespaces|default(["default"]) }}'
+    labels: '{{ item.labels|default({}) }}'
     command: '{{ item.command }}'
     handlers: '{{ item.handlers|default([]) }}'
     subscriptions: '{{ item.subscriptions }}'

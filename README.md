@@ -94,6 +94,8 @@ Notice: for debian9 set `sensu_repository_system` to `ubuntu` and `sensu_reposit
   - name: load
     namespace:
       - default
+    labels:
+      criticity: high
     command: /usr/bin/load -w 2 -c 5
     handlers:
       - mailer

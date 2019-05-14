@@ -24,7 +24,7 @@ class SensuCheck:
       return True
 
     for old_label, old_value in old_labels.iteritems():
-      if old_label in new_labels and new_labels[old_label] != old_value:
+      if old_label in new_labels and new_labels[old_label] == old_value:
         continue
       return True
 
@@ -34,7 +34,9 @@ class SensuCheck:
     data = self.get_data()
     if self.labels_has_changed(self.labels, data['metadata'].get('labels')):
       return True
-    for option, value in data:
+
+    data.pop('metadata')
+    for option, value in data.iteritems():
       if not option in options:
         if value:
           return True

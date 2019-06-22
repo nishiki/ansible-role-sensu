@@ -22,7 +22,7 @@ class SensuAsset:
     
   def has_changed(self, options):
     for option, value in self.options.iteritems():
-      if options[option] != value:
+      if (options[option] or value) and options[option] != value:
         return True
     
     return False

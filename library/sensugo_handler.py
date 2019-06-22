@@ -22,7 +22,7 @@ class SensuHandler:
       if not option in options:
         if value:
           return True
-      elif options[option] != value:
+      elif (options[option] or value) and options[option] != value:
         return True
     
     return False

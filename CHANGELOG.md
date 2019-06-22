@@ -9,7 +9,8 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 - feat: add a debug mode with sensu_no_log variable
 - feat: add mutators
 - feat: add sensu_agent_redact variable to add new redact keywords
-- fix:  add new return code for api with the version 5.10
+- fix: add new return code for api with the version 5.10
+- fix: handler, asset and filter wasn't idempotent
 - fix: create roles before users
 - doc: add example in readme
 

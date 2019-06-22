@@ -2,6 +2,7 @@
 - hosts: default
   connection: local
   vars:
+    sensu_no_log: false
     sensu_backend: yes
     sensu_agent_redact:
       - supersecret

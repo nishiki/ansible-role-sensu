@@ -59,7 +59,7 @@ class SensuApi:
       raise Exception('Server return 500 error: {}'.format(r.text))
     elif r.status_code == 401:
       raise Exception('Authentification has failed')
-    elif r.status_code != 200:
+    elif r.status_code not in [200, 201, 204]:
       raise Exception('Server return an unknown error: {}'.format(r.text))
 
   def delete(self, path):

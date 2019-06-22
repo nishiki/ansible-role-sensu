@@ -20,7 +20,10 @@ class SensuCheck:
     return {}
 
   def labels_has_changed(self, new_labels, old_labels):
-    if old_labels is None or len(new_labels) != len(old_labels):
+    if not old_labels and not new_labels:
+      return False
+
+    if len(new_labels) != len(old_labels):
       return True
 
     for old_label, old_value in old_labels.iteritems():

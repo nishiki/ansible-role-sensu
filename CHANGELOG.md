@@ -5,6 +5,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+- feat: add support for ansible 2.8
 - feat: add labels in checks
 - feat: add a debug mode with sensu_no_log variable
 - feat: add mutators

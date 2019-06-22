@@ -1,6 +1,6 @@
 ---
 # <% os =  ENV['OS'] || 'debian9' %>
-# <% ansible = ENV['ANSIBLE_VERSION'] || '2.7' %>
+# <% ansible = ENV['ANSIBLE_VERSION'] || '2.8' %>
 # <% command = os == 'centos7' ? '/usr/sbin/init' : '/bin/systemd' %>
 
 driver:

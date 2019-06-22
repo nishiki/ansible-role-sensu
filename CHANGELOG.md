@@ -5,6 +5,8 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+## [1.2.0] - 2019-06-22
+
 - feat: add support for ansible 2.8
 - feat: add labels in checks
 - feat: add a debug mode with sensu_no_log variable

@@ -22,14 +22,14 @@ class SensuClusterRole:
       return True
 
     for i in range(0, len(self.options['rules'])):
-      for rule, value in self.options['rules'][i].iteritems():
+      for rule, value in self.options['rules'][i].items():
         if not rule in options['rules'][i]:
           if value:
             return True
         elif options['rules'][i][rule] != value:
           return True
         
-      for rule, value in options['rules'][i].iteritems():
+      for rule, value in options['rules'][i].items():
         if not rule in self.options['rules'][i]:
           if value:
             return True

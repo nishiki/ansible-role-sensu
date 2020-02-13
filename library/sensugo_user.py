@@ -21,7 +21,7 @@ class SensuUser:
       pass
     
   def has_changed(self, options):
-    for option, value in self.options.iteritems():
+    for option, value in self.options.items():
       if options[option] != value:
         return True
     

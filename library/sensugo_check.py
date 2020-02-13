@@ -26,7 +26,7 @@ class SensuCheck:
     if len(new_labels) != len(old_labels):
       return True
 
-    for old_label, old_value in old_labels.iteritems():
+    for old_label, old_value in old_labels.items():
       if old_label in new_labels and new_labels[old_label] == old_value:
         continue
       return True
@@ -39,7 +39,7 @@ class SensuCheck:
       return True
 
     data.pop('metadata')
-    for option, value in data.iteritems():
+    for option, value in data.items():
       if not option in options:
         if value:
           return True

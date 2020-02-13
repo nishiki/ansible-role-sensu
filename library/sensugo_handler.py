@@ -18,7 +18,7 @@ class SensuHandler:
       self.options.pop('metadata')
     
   def has_changed(self, options):
-    for option, value in self.options.iteritems():
+    for option, value in self.options.items():
       if not option in options:
         if value:
           return True

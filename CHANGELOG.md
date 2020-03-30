@@ -5,6 +5,14 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+### Fixed
+
+- add compatibily with new sensu version
+
+### Changed
+
+- test: replace kitchen to molecule
+
 ## [1.2.0] - 2019-06-22
 
 - feat: add support for ansible 2.8

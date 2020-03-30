@@ -233,25 +233,13 @@ Notice: for debian9 set `sensu_repository_system` to `ubuntu` and `sensu_reposit
 ```
 
 ## Development
-### Test syntax with yamllint
 
-* install `python` and `python-pip`
-* install yamllint `pip install yamllint`
-* run `yamllint .`
-
-### Test syntax with ansible-lint
-
-* install `python` and `python-pip`
-* install yamllint `pip install ansible-lint`
-* run `ansible-lint .`
-
-### Tests with docker
+### Test with molecule and docker
 
 * install [docker](https://docs.docker.com/engine/installation/)
-* install ruby
-* install bundler `gem install bundler`
-* install dependencies `bundle install`
-* run the tests `kitchen test`
+* install `python3` and `python3-pip`
+* install molecule and dependencies `pip3 install molecule 'molecule[docker]' docker ansible-lint testinfra yamllint`
+* run `molecule test`
 
 ## License
 

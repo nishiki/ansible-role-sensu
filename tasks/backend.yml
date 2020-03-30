@@ -37,6 +37,24 @@
     delay: 5
   tags: sensu
 
+- name: init backend
+  command:
+    cmd: sensu-backend init
+    creates: /etc/sensu/.backend-init
+  environment:
+    SENSU_BACKEND_CLUSTER_ADMIN_USERNAME: '{{ sensu_api_user }}'
+    SENSU_BACKEND_CLUSTER_ADMIN_PASSWORD: '{{ sensu_api_password }}'
+  tags: sensu
+
+- name: hold init
+  copy:
+    content: ''
+    dest: /etc/sensu/.backend-init
+    owner: root
+    group: root
+    mode: 0600
+  tags: sensu
+
 - name: manage cluster roles
   sensugo_cluster_role:
     name: '{{ item.name }}'

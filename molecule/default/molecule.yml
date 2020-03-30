@@ -1,0 +1,18 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: debian10
+    image: nishiki/debian10:molecule
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /bin/systemd
+    capabilities:
+      - SYS_ADMIN
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+verifier:
+  name: testinfra

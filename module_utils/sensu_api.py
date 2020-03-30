@@ -19,7 +19,7 @@ class SensuApi:
     if r.status_code == 401:
       raise Exception('Authentification has failed')
 
-    self.headers = { 'Authorization': r.json()['access_token'] }
+    self.headers = { 'Authorization': 'Bearer %s' % (r.json()['access_token']) }
 
   def get(self, path):
     r = requests.get(

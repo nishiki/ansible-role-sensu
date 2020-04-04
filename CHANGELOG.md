@@ -8,6 +8,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 ### Fixed
 
 - add compatibily with new sensu version
+- remove no_log warnings with sensu_go libraries
 
 ### Changed
 

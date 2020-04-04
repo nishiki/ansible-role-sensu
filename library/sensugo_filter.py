@@ -55,7 +55,7 @@ def main():
     'runtime_assets': { 'type': 'list', 'default': [] },
     'api_url':        { 'type': 'str',  'default': 'http://127.0.0.1:8080' },
     'api_user':       { 'type': 'str',  'default': 'admin' },
-    'api_password':   { 'type': 'str',  'default': 'P@ssw0rd!' },
+    'api_password':   { 'type': 'str',  'default': 'P@ssw0rd!', 'no_log': True },
     'state':          { 'type': 'str',  'default': 'present', 'choices': ['present', 'absent'] }
   }
   module = AnsibleModule(argument_spec=fields)

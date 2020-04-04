@@ -4,10 +4,8 @@
   roles:
     - ansible-role-sensu
   vars:
-    #sensu_api_password: test
     sensu_repository_system: ubuntu
     sensu_repository_release: xenial
-    sensu_no_log: false
     sensu_backend: yes
     sensu_agent_redact:
       - supersecret

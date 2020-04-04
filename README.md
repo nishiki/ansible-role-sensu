@@ -67,7 +67,6 @@ Notice: for debian9 set `sensu_repository_system` to `ubuntu` and `sensu_reposit
 
 ### Backend
 
-* `sensu_no_log` - you can disable ansible no_log to print the errors with the backend api (default: `true`)
 * `sensu_backend` - enable sensu backend installation (default: `no`)
 * `sensu_backend_config` - hash with the optional configuration ([see sensu configuration](https://docs.sensu.io/sensu-go/latest/reference/backend/))
 * `sensu_assets` - array with the asset definitions

@@ -64,6 +64,8 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_cluster_roles }}'
+  loop_control:
+    label: '{{ item.name }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu
@@ -78,6 +80,8 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_users }}'
+  loop_control:
+    label: '{{ item.name }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu
@@ -90,6 +94,8 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_namespaces }}'
+  loop_control:
+    label: '{{ item.name }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu
@@ -105,6 +111,8 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_assets }}'
+  loop_control:
+    label: '{{ item.name }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu
@@ -121,6 +129,8 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_filters }}'
+  loop_control:
+    label: '{{ item.name }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu
@@ -135,6 +145,8 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_mutators }}'
+  loop_control:
+    label: '{{ item.name }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu
@@ -151,6 +163,8 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_handlers }}'
+  loop_control:
+    label: '{{ item.name }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu
@@ -170,6 +184,8 @@
     api_user: '{{ sensu_api_user }}'
     api_password: '{{ sensu_api_password }}'
   loop: '{{ sensu_checks }}'
+  loop_control:
+    label: '{{ item.name }}'
   run_once: true
   no_log: '{{ sensu_no_log }}'
   tags: sensu

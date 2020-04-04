@@ -13,6 +13,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 ### Changed
 
 - test: replace kitchen to molecule
+- add loop label for sensu_go modules
 
 ## [1.2.0] - 2019-06-22
 

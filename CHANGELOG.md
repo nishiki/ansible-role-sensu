@@ -5,6 +5,8 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+## [1.3.0] - 2020-04-04
+
 ### Fixed
 
 - add compatibily with new sensu version

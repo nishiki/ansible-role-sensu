@@ -1,7 +1,9 @@
 ---
 - name: install backend dependencies
   package:
-    name: python-requests
+    name:
+      - python-requests
+      - python3-requests
   register: result
   retries: 3
   delay: 1

@@ -7,6 +7,7 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ### Fixed
 
+- add full python3 support
 - remove useless no_log variable
 
 ## [1.3.0] - 2020-04-04

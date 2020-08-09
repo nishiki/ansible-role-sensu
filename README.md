@@ -130,6 +130,16 @@ Notice: for debian9 set `sensu_repository_system` to `ubuntu` and `sensu_reposit
       timeout: 10
 ```
 
+* `sensu_hooks` - array with the hook definitions
+
+```
+  - name: restart-apache
+    namespace:
+      - default
+    command: /etc/init.d/apache2 restart
+    timeout: 10
+```
+
 * `sensu_filters` - array with the filter definitions
 
 ```

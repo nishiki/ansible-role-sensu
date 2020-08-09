@@ -58,3 +58,7 @@ def test_sensu_check(host):
     cmd = host.run('sensuctl filter list --namespace  %s' % namespace)
     assert cmd.succeeded
     assert re.search('state_changed.*\\s+allow\\s+\\(event.check.occurrences == 1\\)', cmd.stdout)
+
+    cmd = host.run('sensuctl hook list --namespace  %s' % namespace)
+    assert cmd.succeeded
+    assert re.search('restart-apache.*\\s+/etc/init.d/apache2 restart\\s+10\\s+false', cmd.stdout)

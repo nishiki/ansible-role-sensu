@@ -52,6 +52,12 @@
         namespaces:
           - production
           - dev
+    sensu_hooks:
+      - name: restart-apache
+        command: /etc/init.d/apache2 restart
+        namespaces:
+          - production
+          - dev
     sensu_checks:
       - name: ping
         command: ping -c 1 127.0.0.1

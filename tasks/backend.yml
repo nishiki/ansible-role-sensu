@@ -162,6 +162,21 @@
   run_once: true
   tags: sensu
 
+- name: manage hooks
+  sensugo_hook:
+    name: '{{ item.name }}'
+    namespaces: '{{ item.namespaces|default(["default"]) }}'
+    command: '{{ item.command }}'
+    timeout: '{{ item.timeout|default(10) }}'
+    api_url: '{{ sensu_api_url }}'
+    api_user: '{{ sensu_api_user }}'
+    api_password: '{{ sensu_api_password }}'
+  loop: '{{ sensu_hooks }}'
+  loop_control:
+    label: '{{ item.name }}'
+  run_once: true
+  tags: sensu
+
 - name: manage checks
   sensugo_check:
     name: '{{ item.name }}'

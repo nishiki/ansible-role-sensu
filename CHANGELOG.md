@@ -5,6 +5,10 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+### Feat
+
+- add hooks
+
 ### Fixed
 
 - add full python3 support

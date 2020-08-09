@@ -5,6 +5,8 @@ Which is based on [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+## [1.4.0] - 2020-08-09
+
 ### Feat
 
 - add hooks
